@@ -1,0 +1,38 @@
+﻿{
+  "Routes": [],
+  "Aggregates": [],
+  "GlobalConfiguration": {
+    "BaseUrl": null,
+    "ServiceDiscoveryProvider": {
+      "Scheme": "http",
+      "Host": "192.168.137.102",
+      "Port": 8500,
+      "Type": "Consul",
+      "Token": null,
+      "ConfigurationKey": null
+    },
+    "DownstreamScheme": "http",
+    "HttpHandlerOptions": {
+      "AllowAutoRedirect": false,
+      "UseCookieContainer": false,
+      "UseTracing": false
+    },
+    //"RateLimitOptions": {
+    //  "ClientIdHeader": "ClientId", 
+    //  "QuotaExceededMessage": "Too many requests, are you OK?", 
+    //  "RateLimitCounterPrefix": "ocelot",
+    //  "DisableRateLimitHeaders": false,
+    //  "HttpStatusCode": 429
+    //},
+    //"QoSOptions": {
+    //  "ExceptionsAllowedBeforeBreaking": 0,
+    //  "DurationOfBreak": 0,
+    //  "TimeoutValue": 0
+    //},
+    "LoadBalancerOptions": {
+      "Type": "LeastConnection",
+      "Key": null,
+      "Expiry": 0
+    }
+  }
+}
