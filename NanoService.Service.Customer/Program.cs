@@ -1,4 +1,4 @@
-using NanoService.Service.Customer.Extensions;
+using NanoService.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
