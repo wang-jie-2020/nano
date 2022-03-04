@@ -32,7 +32,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.RoutePrefix = "swagger";
+        c.SwaggerEndpoint("/CustomerService/swagger/v1/swagger.json", "Customer API");
+        c.SwaggerEndpoint("/ProductService/swagger/v1/swagger.json", "Product API");
+    });
 }
 
 app.UseAuthentication();
