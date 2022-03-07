@@ -22,8 +22,15 @@ builder.Services.AddIdentityServer(options => { IdentityModelEventSource.ShowPII
     //.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
     .AddDeveloperSigningCredential();
 
-var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("default", policy =>
+     {
+         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+     });
+});
 
+var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -32,6 +39,8 @@ app.UseHealthChecks("/healthz");
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("default");
 
 app.UseIdentityServer();
 
