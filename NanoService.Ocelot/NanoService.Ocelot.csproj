@@ -16,4 +16,10 @@
     <PackageReference Include="Ocelot.Provider.Consul" Version="18.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NanoService.Infrastructure\NanoService.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties configurations_4ocelot_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>
