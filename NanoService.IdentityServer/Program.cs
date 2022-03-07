@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks();
 
 builder.Services.AddIdentityServer(options => { IdentityModelEventSource.ShowPII = true; })
     .AddInMemoryIdentityResources(Config.IdentityResources())
@@ -23,11 +24,10 @@ builder.Services.AddIdentityServer(options => { IdentityModelEventSource.ShowPII
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseHealthChecks("/healthz");
 
 app.UseAuthorization();
 
