@@ -5,14 +5,22 @@
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/ProductService/{url}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ServiceName": "ProductService"
+      "ServiceName": "ProductService",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ProductServiceAuthentication",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/{url}",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/CustomerService/{url}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ServiceName": "CustomerService"
+      "ServiceName": "CustomerService",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "CustomerServiceAuthentication",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/{url}",

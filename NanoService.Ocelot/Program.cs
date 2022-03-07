@@ -28,6 +28,22 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("ProductServiceAuthentication", option =>
+    {
+        option.Authority = "http://vm.local.cn:5501";
+        option.Audience = "admin.resource";
+        option.RequireHttpsMetadata = false;
+    })
+    .AddJwtBearer("CustomerServiceAuthentication", option =>
+    {
+        option.Authority = "http://vm.local.cn:5501";
+        option.Audience = "admin.resource";
+        option.RequireHttpsMetadata = false;
+    });
+
+
+
 builder.Configuration.AddJsonFile("./Configurations/ocelot.json");
 builder.Services.AddOcelot(builder.Configuration).AddConsul().AddPolly();
 
