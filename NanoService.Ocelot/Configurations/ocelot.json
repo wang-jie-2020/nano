@@ -1,7 +1,14 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/{url}",
+      "DownstreamPathTemplate": "/swagger/{url}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/ProductService/swagger/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "ServiceName": "ProductService"
+    },
+    {
+      "DownstreamPathTemplate": "/ProductService/{url}",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/ProductService/{url}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
@@ -12,7 +19,14 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/{url}",
+      "DownstreamPathTemplate": "/swagger/{url}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/CustomerService/swagger/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "ServiceName": "CustomerService"
+    },
+    {
+      "DownstreamPathTemplate": "/CustomerService/{url}",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/CustomerService/{url}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
@@ -21,20 +35,6 @@
         "AuthenticationProviderKey": "CustomerServiceAuthentication",
         "AllowedScopes": []
       }
-    },
-    {
-      "DownstreamPathTemplate": "/{url}",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/IdentityService/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ServiceName": "IdentityService"
-    },
-    {
-      "DownstreamPathTemplate": "/{url}",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/OcelotService/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ServiceName": "OcelotService"
     }
   ],
   "Aggregates": [],
