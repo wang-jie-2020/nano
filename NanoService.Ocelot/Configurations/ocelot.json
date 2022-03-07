@@ -8,7 +8,7 @@
       "ServiceName": "ProductService"
     },
     {
-      "DownstreamPathTemplate": "/ProductService/{url}",
+      "DownstreamPathTemplate": "/{url}",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/ProductService/{url}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
@@ -67,7 +67,7 @@
     //  "TimeoutValue": 0
     //},
     "LoadBalancerOptions": {
-      "Type": "LeastConnection",
+      "Type": "RoundRobin",
       "Key": null,
       "Expiry": 0
     }
