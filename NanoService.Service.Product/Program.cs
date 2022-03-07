@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using NanoService.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,19 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-app.UseSwagger();
+app.UseSwagger(c => c.PreSerializeFilters.Add(
+    (doc, req) =>
+    {
+        OpenApiPaths paths = new OpenApiPaths();
+
+        foreach (var path in doc.Paths)
+        {
+            paths.Add("/ProductService" + path.Key, path.Value);
+        }
+
+        doc.Paths = paths;
+    }));
+
 app.UseSwaggerUI();
 app.UseHealthChecks("/healthz");
 

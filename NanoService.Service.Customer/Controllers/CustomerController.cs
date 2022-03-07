@@ -2,7 +2,7 @@
 
 namespace NanoService.Service.Customer.Controllers
 {
-    [Route("api/customer")]
+    [Route("CustomerService/api/customer")]
     public class CustomerController : Controller
     {
         [HttpGet]
