@@ -12,7 +12,7 @@
     "NanoService.IdentityServer": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "http://vm.local.cn:5501",
       "environmentVariables": {
