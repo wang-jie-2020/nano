@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NanoService.Service.Product.Controllers
 {
+    [Authorize]
     [Route("api/product")]
     public class ProductController : Controller
     {
@@ -10,9 +12,10 @@ namespace NanoService.Service.Product.Controllers
         public IActionResult HelloProduct()
         {
             var connection = Request.HttpContext.Connection;
+            var user = Request.HttpContext.User.Identity?.Name ?? "未知用户";
+            var address = connection.LocalIpAddress?.MapToIPv4().ToString() + ":" + Request.HttpContext.Connection.LocalPort;
 
-            var ip = connection.LocalIpAddress?.MapToIPv4().ToString() + ":" + Request.HttpContext.Connection.LocalPort;
-            return Content(ip);
+            return Content($"{user}访问的是{address}");
         }
     }
 }
