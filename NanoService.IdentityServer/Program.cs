@@ -1,9 +1,12 @@
 ﻿using System.Security.Claims;
 using IdentityServer4;
 using IdentityServer4.Models;
+using IdentityServer4.Services;
 using IdentityServer4.Test;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Logging;
 using NanoService.IdentityServer;
+using NanoService.IdentityServer.Extend;
 using NanoService.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +23,10 @@ builder.Services.AddIdentityServer(options => { IdentityModelEventSource.ShowPII
     .AddInMemoryClients(Config.Clients())
     .AddTestUsers(Config.Users())
     //.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
-    .AddDeveloperSigningCredential();
+    .AddDeveloperSigningCredential()
+    .AddProfileService<ExtendProfileService>();
+
+builder.Services.Replace(ServiceDescriptor.Transient<IClaimsService, ExtendClaimService>());
 
 builder.Services.AddCors(options =>
 {
