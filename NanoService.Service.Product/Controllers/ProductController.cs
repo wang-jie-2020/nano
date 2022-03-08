@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NanoService.Service.Product.Controllers
 {
-    [Authorize]
     [Route("api/product")]
     public class ProductController : Controller
     {

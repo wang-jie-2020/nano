@@ -13,8 +13,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHealthChecks("/healthz");
 
-app.UseAuthorization();
-
 app.MapControllers();
 
 app.UseConsul(app.Configuration);
