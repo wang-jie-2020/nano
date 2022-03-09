@@ -2,9 +2,15 @@
 
 namespace NanoService.Service.Customer.Controllers
 {
-    [Route("CustomerService/api/customer")]
+    [Route("api/customer")]
     public class CustomerController : Controller
     {
+        [HttpGet]
+        public IActionResult Hello()
+        {
+            return HelloCustomer();
+        }
+
         [HttpGet]
         [Route("hello")]
         public IActionResult HelloCustomer()

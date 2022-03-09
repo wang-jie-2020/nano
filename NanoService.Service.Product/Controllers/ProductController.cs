@@ -14,11 +14,15 @@ namespace NanoService.Service.Product.Controllers
         }
 
         [HttpGet]
+        public IActionResult Hello()
+        {
+            return HelloProduct();
+        }
+
+        [HttpGet]
         [Route("hello")]
         public IActionResult HelloProduct()
         {
-            var text = _configuration["product.health"];
-
             var connection = Request.HttpContext.Connection;
             var user = Request.HttpContext.User.Identity?.Name ?? "未知用户";
             var address = connection.LocalIpAddress?.MapToIPv4().ToString() + ":" + Request.HttpContext.Connection.LocalPort;
