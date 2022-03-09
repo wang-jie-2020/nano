@@ -27,56 +27,15 @@ builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme()
-    {
-        Type = SecuritySchemeType.OAuth2,
-        Flows = new OpenApiOAuthFlows()
-        {
-            Password = new OpenApiOAuthFlow()
-            {
-                AuthorizationUrl = new Uri("http://vm.local.cn:5501/connect/authorize"),
-                Scopes = new Dictionary<string, string>
-                {
-                    {"customer.scope", "customerµÄscope"},
-                    {"product.scope", "productµÄscope"}
-
-                },
-                TokenUrl = new Uri("http://vm.local.cn:5501/connect/token"),
-            }
-        }
-    });
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "oauth2"
-                        }
-                    },
-                    Array.Empty<string>()
-                }
-            });
-});
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddHealthChecks();
 
 builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("ProductServiceAuthentication", option =>
+    .AddJwtBearer("CustomerAuthentication", option =>
     {
-        option.Authority = "http://vm.local.cn:5501";
-        option.Audience = "admin.resource";
-        option.RequireHttpsMetadata = false;
-    })
-    .AddJwtBearer("CustomerServiceAuthentication", option =>
-    {
-        option.Authority = "http://vm.local.cn:5501";
-        option.Audience = "admin.resource";
+        option.Authority = builder.Configuration["auth:authority"];
+        option.Audience = builder.Configuration["auth:audience"];
         option.RequireHttpsMetadata = false;
     });
 
@@ -91,12 +50,11 @@ app.UseSwaggerUI(c =>
 {
     c.RoutePrefix = "swagger";
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ocelot API");
-    c.SwaggerEndpoint("/CustomerService/swagger/v1/swagger.json", "Customer API");
-    c.SwaggerEndpoint("/ProductService/swagger/v1/swagger.json", "Product API");
+    c.SwaggerEndpoint("/customer/swagger/v1/swagger.json", "Customer API");
+    c.SwaggerEndpoint("/product/swagger/v1/swagger.json", "Product API");
+    c.SwaggerEndpoint("/product/swagger/v1-gateway/swagger.json", "Product API Gateway");
 
-    c.OAuthClientId("client_resourceOwnerPassword");
-    c.OAuthClientSecret("secret");
-    c.OAuthUsePkce();
+
 });
 
 /*

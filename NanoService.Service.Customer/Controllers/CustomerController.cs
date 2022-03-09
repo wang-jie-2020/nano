@@ -21,5 +21,16 @@ namespace NanoService.Service.Customer.Controllers
 
             return Content($"{user}访问的是{address}");
         }
+
+        /// <summary>
+        /// 网关中显示的swagger的调用尝试方式一，体验感明显不好
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/customer/api/test-gateway-swagger")] 
+        public IActionResult HelloCustomerForGateway()
+        {
+            return HelloCustomer();
+        }
     }
 }
