@@ -10,6 +10,9 @@ namespace NanoService.Infrastructure.Extensions
     {
         public static IApplicationBuilder UseConsul(this IApplicationBuilder app, IConfiguration configuration)
         {
+            if (configuration["consul:enabled"] == "false")
+                return app;
+
             ConsulClient client = new ConsulClient(consul =>
             {
                 consul.Address = new Uri(configuration["consul:server:url"]);

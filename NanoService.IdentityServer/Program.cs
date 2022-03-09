@@ -22,8 +22,8 @@ builder.Services.AddIdentityServer(options => { IdentityModelEventSource.ShowPII
     .AddInMemoryApiResources(Config.ApiResources())
     .AddInMemoryClients(Config.Clients())
     .AddTestUsers(Config.Users())
-    //.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
     .AddDeveloperSigningCredential()
+    //.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
     .AddProfileService<ExtendProfileService>();
 
 builder.Services.Replace(ServiceDescriptor.Transient<IClaimsService, ExtendClaimService>());
