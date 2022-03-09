@@ -29,5 +29,13 @@ namespace NanoService.Service.Product.Controllers
 
             return Content($"{user}访问的是{address}");
         }
+
+        [HttpGet]
+        [Route("authorize")]
+        [Authorize]
+        public IActionResult Authorize()
+        {
+            return HelloProduct();
+        }
     }
 }
