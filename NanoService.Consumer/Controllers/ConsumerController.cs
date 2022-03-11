@@ -1,17 +1,17 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using NanoService.Consumer.Models;
+using NanoService.Consumer.Services;
 
 namespace NanoService.Consumer.Controllers
 {
     [Route("api/consumer")]
     public class ConsumerController : Controller
     {
-        private readonly SampleDbContext _dbContext;
+        private readonly ICustomerService _customerService;
 
-        public ConsumerController(SampleDbContext sampleDbContext)
+        public ConsumerController(ICustomerService customerService)
         {
-            _dbContext = sampleDbContext;
+            _customerService = customerService;
         }
 
         [HttpGet]
@@ -32,7 +32,8 @@ namespace NanoService.Consumer.Controllers
         {
             var connection = Request.HttpContext.Connection;
             var user = Request.HttpContext.User.Identity?.Name ?? "未知用户";
-            var address = connection.LocalIpAddress?.MapToIPv4().ToString() + ":" + Request.HttpContext.Connection.LocalPort;
+            var address = connection.LocalIpAddress?.MapToIPv4().ToString() + ":" +
+                          Request.HttpContext.Connection.LocalPort;
 
             return Content($"{user}访问的是{address}");
         }
@@ -60,6 +61,13 @@ namespace NanoService.Consumer.Controllers
             httpClient.Send(req);
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("hello-service-webApiClient")]
+        public async Task<ActionResult<object>> HelloServiceWebApiClient()
+        {
+            return await _customerService.GetAsync();
         }
     }
 }

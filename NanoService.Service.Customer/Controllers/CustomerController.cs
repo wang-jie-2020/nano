@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NanoService.Service.Customer.Models;
 
 namespace NanoService.Service.Customer.Controllers
 {
@@ -27,10 +28,17 @@ namespace NanoService.Service.Customer.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("/customer/api/test-gateway-swagger")] 
+        [Route("/customer/api/test-gateway-swagger")]
         public IActionResult HelloCustomerForGateway()
         {
             return HelloCustomer();
+        }
+
+        [HttpPost]
+        [Route("/api/customer")]
+        public ActionResult<AppCustomer> HelloNewCustomer([FromBody]AppCustomer customer)
+        {
+            return customer;
         }
     }
 }

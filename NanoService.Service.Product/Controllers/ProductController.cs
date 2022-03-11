@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NanoService.Service.Product.Models;
 
 namespace NanoService.Service.Product.Controllers
 {
@@ -36,6 +37,15 @@ namespace NanoService.Service.Product.Controllers
         public IActionResult Authorize()
         {
             return HelloProduct();
+        }
+
+
+        [HttpPost]
+        [Route("/api/product")]
+        [Authorize]
+        public ActionResult<AppProduct> HelloNewProduct(AppProduct product)
+        {
+            return product;
         }
     }
 }

@@ -1,7 +1,7 @@
 using Exceptionless;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using NanoService.Consumer.Models;
+using NanoService.Consumer.Services;
 using NanoService.Infrastructure.Extensions;
 using Serilog;
 using Serilog.Events;
@@ -28,6 +28,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 //builder.Services.AddExceptionless();
+
+builder.Services.AddHttpApi<ICustomerService>();    //这块的注册有点笨，可以写扩展，暂略
+builder.Services.ConfigureHttpApi<ICustomerService>(options =>
+{
+    options.HttpHost = new Uri("http://vm.local.cn:5510");
+});
 
 //var sqlLiteConnection = new SqliteConnection("DataSource=:memory:");
 //sqlLiteConnection.Open();
