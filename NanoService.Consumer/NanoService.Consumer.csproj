@@ -15,6 +15,9 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
 		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+		<PackageReference Include="WebApiClientCore" Version="2.0.2" />
+		<PackageReference Include="WebApiClientCore.Extensions.NewtonsoftJson" Version="2.0.2" />
+		<PackageReference Include="WebApiClientCore.Extensions.OAuths" Version="2.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>

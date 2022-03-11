@@ -78,7 +78,7 @@ var app = builder.Build();
 
 app.UseSwagger(c =>
 {
-    //网关中显示的swagger的调用尝试方式二，体验感一言难尽
+    //网关中显示的swagger的调用尝试方式二，增加一个前缀，体验感一言难尽
     c.PreSerializeFilters.Add((doc, req) =>
     {
         if (doc.Info.Version.EndsWith("gateway"))

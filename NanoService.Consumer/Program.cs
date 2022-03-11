@@ -10,9 +10,7 @@ using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//DebugSerilog
-Serilog.Debugging.SelfLog.Enable(Console.Error);
-
+//Serilog.Debugging.SelfLog.Enable(Console.Error);
 Log.Logger = new LoggerConfiguration()
 
     .Enrich.FromLogContext()
@@ -29,14 +27,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
+//builder.Services.AddExceptionless();
 
-var sqlLiteConnection = new SqliteConnection("DataSource=:memory:");
-sqlLiteConnection.Open();
+//var sqlLiteConnection = new SqliteConnection("DataSource=:memory:");
+//sqlLiteConnection.Open();
 
-builder.Services.AddEntityFrameworkSqlite().AddDbContext<SampleDbContext>(c => c.UseSqlite(sqlLiteConnection));
+//builder.Services.AddEntityFrameworkSqlite().AddDbContext<SampleDbContext>(c => c.UseSqlite(sqlLiteConnection));
 
 var app = builder.Build();
-
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -44,6 +42,7 @@ app.UseHealthChecks("/healthz");
 
 app.MapControllers();
 
+//app.UseExceptionless();
 app.UseConsul(app.Configuration);
 
 app.Run();

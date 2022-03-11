@@ -17,11 +17,11 @@ namespace NanoService.Consumer.Controllers
         [HttpGet]
         public IActionResult Hello()
         {
-            _dbContext.Applications.Add(new Application()
-            {
-                Id = new Random().Next(1, 1000),
-                Name = new Random().Next(1, 1000).ToString()
-            });
+            //_dbContext.Applications.Add(new Application()
+            //{
+            //    Id = new Random().Next(1, 1000),
+            //    Name = new Random().Next(1, 1000).ToString()
+            //});
 
             return HelloConsumer();
         }
@@ -38,8 +38,8 @@ namespace NanoService.Consumer.Controllers
         }
 
         [HttpGet]
-        [Route("hello-trace")]
-        public IActionResult HelloTrace()
+        [Route("hello-service")]
+        public IActionResult HelloService()
         {
             var httpClient = new HttpClient();
 
